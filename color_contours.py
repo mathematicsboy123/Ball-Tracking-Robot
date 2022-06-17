@@ -28,7 +28,7 @@ while True:
     # Get contours in image 
     contours, hierarchy = cv2.findContours(image=thresh, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_NONE)
     print(contours)
-    
+
     # Convert grey-scale into RGB image to display contours
     cv2.drawContours(image=color, contours=contours, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
 
