@@ -18,19 +18,21 @@ while True:
     # Get color and convert to gray-scale
     buffer = picam2.capture_buffer("lores")
     grey = buffer[:s1 * h1].reshape((h1, s1))
+    color = cv2.cvtColor(grey, cv2.COLOR_GRAY2RGB)
 
     # Convert gray-scale to binary
-    ret, thresh = cv2.threshold(grey, 150, 255, cv2.THRESH_BINARY)
+    thresh = cv2.adaptiveThreshold(grey, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 601, 2)
     cv2.waitKey(500)
-    cv2.imwrite('binaryold.jpg', thresh)
+    cv2.imwrite('binary.jpg', thresh)
 
     # Get contours in image 
     contours, hierarchy = cv2.findContours(image=thresh, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_NONE)
+    print(contours)
     
     # Convert grey-scale into RGB image to display contours
-    color = cv2.cvtColor(grey, cv2.COLOR_GRAY2RGB)
     cv2.drawContours(image=color, contours=contours, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
 
     # Save image with contours drawn on top
     cv2.waitKey(500)
+    cv2.imwrite('contours.jpg', color)
     break
