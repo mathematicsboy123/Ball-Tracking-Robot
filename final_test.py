@@ -22,7 +22,6 @@ while True:
     # Convert gray-scale to binary
     ret, thresh = cv2.threshold(grey, 150, 255, cv2.THRESH_BINARY)
     cv2.waitKey(500)
-    cv2.imwrite('binaryold.jpg', thresh)
 
     # Get contours in image 
     contours, hierarchy = cv2.findContours(image=thresh, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_NONE)
@@ -33,4 +32,5 @@ while True:
 
     # Save image with contours drawn on top
     cv2.waitKey(500)
+    cv2.imwrite('contours.jpg', color)
     break
