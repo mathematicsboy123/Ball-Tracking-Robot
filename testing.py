@@ -1,41 +1,50 @@
-import cv2
 import numpy as np
-import time
 import cv2
-from picamera2 import Picamera2, Preview, MappedArray
+from picamera2 import Picamera2
+
+picam2 = Picamera2()
 
 # Configure camera image types
-picam2 = Picamera2()
-config = picam2.still_configuration(main={"size": (320, 240)})
-picam2.configure(config)
+def config_camera():
+    config = picam2.still_configuration(main={"size": (320, 240)})
+    picam2.configure(config)
+    picam2.start()
 
-# Configure camera to be able to take pictures
-picam2.start()
-while True:
-    start_time = time.monotonic()
-    # Get color and convert to gray-scale
+def detect_ball():
+    # Get image and convert to BGR to HSV
     buffer = picam2.capture_array()
-    cv2.imwrite('color.jpg', buffer)
     color = cv2.cvtColor(buffer, cv2.COLOR_RGB2BGR)
-
     hsv = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
     
-    # Threshold of blue in HSV space
-    lower_blue = np.array([40, 40, 40]) # Darker bound of color
-    upper_blue = np.array([100, 100, 100]) # Lighter bound of color
- 
+    # Threshold of red in HSV space
+    lower_blue = np.array([140, 160, 10]) # Darker bound of color
+    upper_blue = np.array([200, 255, 255]) # Lighter bound of color
+
+    # Generate mask useing the color bounds
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
     cv2.imwrite('binary.jpg', mask)
 
-    # Get contours in image 
-    contours, hierarchy = cv2.findContours(image=mask, mode=cv2.RETR_TREE, method=cv2.CHAIN_APPROX_NONE)
+    # Find the 
+    white_pix = np.sum(mask == 255)
+    cX = 0
+    cY = 0
+    red_found = "no"
+    if white_pix > 1000:
+    # Find the center of the circle using the binary image
+        M = cv2.moments(mask)
+        try:
+            cX = int(M["m10"] / M["m00"])
+            cY = int(M["m01"] / M["m00"])
+            cv2.circle(color, (cX, cY), 5, (255, 0, 0), -1)
+        except ZeroDivisionError:
+            pass
 
-    # Convert grey-scale into RGB image to display contours
-    cv2.drawContours(image=buffer, contours=contours, contourIdx=-1, color=(0, 255, 0), thickness=2, lineType=cv2.LINE_AA)
+        cv2.circle(color, (cX,cY), radius=0, color=(0, 0, 255), thickness=-1)
+        cv2.imwrite("center.jpg", color)
+        red_found = "yes"
 
-    # Save image with contours drawn on top
-    cv2.waitKey(500)
-    cv2.imwrite('contours.jpg', buffer)
+    return [cX/320, red_found, white_pix, cY/240]
 
-    end_time = time.monotonic()
-    print((end_time - start_time))
+if __name__ == "__main__":
+    config_camera()
+    detect_ball()
