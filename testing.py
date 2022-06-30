@@ -24,7 +24,7 @@ def detect_ball():
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
     cv2.imwrite('binary.jpg', mask)
 
-    # Find the 
+    # Find the white pixels and then calculate the center point
     white_pix = np.sum(mask == 255)
     cX = 0
     cY = 0

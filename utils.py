@@ -11,42 +11,49 @@ A1B = 7
 B1A = 11
 B1B = 13
 
+# Set up GPIO pins
 GPIO.setup(A1B, GPIO.OUT)
 GPIO.setup(A1A, GPIO.OUT)
 
 GPIO.setup(B1B, GPIO.OUT)
 GPIO.setup(B1A, GPIO.OUT)
 
+# Reverse
 def reverse():
     GPIO.output(A1B, GPIO.HIGH)
     GPIO.output(A1A, GPIO.LOW)
     GPIO.output(B1B, GPIO.HIGH)
     GPIO.output(B1A, GPIO.LOW)
-    
+
+# Forward
 def forward():
     GPIO.output(A1B, GPIO.LOW)
     GPIO.output(A1A, GPIO.HIGH)
     GPIO.output(B1B, GPIO.LOW)
     GPIO.output(B1A, GPIO.HIGH)
-    
+
+# Right
 def rightturn():
     GPIO.output(A1B,GPIO.LOW)
     GPIO.output(A1A,GPIO.HIGH)
     GPIO.output(B1B,GPIO.HIGH)
     GPIO.output(B1A,GPIO.LOW)
-     
+
+# Left
 def leftturn():
     GPIO.output(A1B,GPIO.HIGH)
     GPIO.output(A1A,GPIO.LOW)
     GPIO.output(B1B,GPIO.LOW)
     GPIO.output(B1A,GPIO.HIGH)
 
+# Stop
 def stop():
     GPIO.output(A1A,GPIO.LOW)
     GPIO.output(A1B,GPIO.LOW)
     GPIO.output(B1A,GPIO.LOW)
     GPIO.output(B1B,GPIO.LOW)
 
+# Find the color values in the center of an image (Troubleshooting)
 def center_average(hsv):
     avg = np.array([0, 0, 0])
     for i in range(10):
