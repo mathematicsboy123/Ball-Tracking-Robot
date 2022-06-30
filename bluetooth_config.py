@@ -15,7 +15,7 @@ while True:
         rightturn()
     elif cmd == "l":
         leftturn()
-    elif cmd == "s":
+    elif cmd == "'":
         ball_tracking()
     elif cmd == "p":
         stop()
