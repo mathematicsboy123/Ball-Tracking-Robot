@@ -1,6 +1,6 @@
 import testing
 import time
-from utils import rightturn, leftturn, forward, stop
+from utils import rightturn, leftturn, forward, stop, get_distance
 import RPi.GPIO as GPIO
     
 testing.config_camera()
@@ -15,6 +15,7 @@ def ball_tracking():
             rightturn()
         elif 0.35 < image_detection[0] < 0.65:
             forward()
+            get_distance()
         elif image_detection[0] > 0.6:
             leftturn()
         if image_detection[2] > 40000 or 0.49 < image_detection[3] < 0.51 and image_detection[2] > 30000 and 0.49 < image_detection[0] < 0.51:
@@ -28,5 +29,7 @@ def ball_tracking():
     time.sleep(0.1)
 
 
+
 if __name__ == "__main__":
-    ball_tracking()
+    while True:
+        ball_tracking()

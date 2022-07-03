@@ -1,4 +1,6 @@
+from operator import ge
 import numpy as np
+import time
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BOARD)
@@ -11,12 +13,49 @@ A1B = 7
 B1A = 11
 B1B = 13
 
+trigger = 15
+echo = 19
+
 # Set up GPIO pins
+GPIO.setup(trigger, GPIO.OUT)
+GPIO.setup(echo, GPIO.IN)
+
 GPIO.setup(A1B, GPIO.OUT)
 GPIO.setup(A1A, GPIO.OUT)
 
 GPIO.setup(B1B, GPIO.OUT)
 GPIO.setup(B1A, GPIO.OUT)
+
+
+# Get distance
+
+def get_distance():
+    GPIO.output(trigger, True)
+
+    time.sleep(0.00001)
+    GPIO.output(trigger, False)
+
+    start = time.time()
+    stop = time.time()
+
+    print("here")
+ 
+    while GPIO.input(echo) == 0:
+        start = time.time()
+
+    print("here2")
+    
+    while GPIO.input(echo) == 1:
+        stop = time.time()
+    
+    print(GPIO.input(echo))
+
+    print("here3")
+
+    TimeElapsed = stop - start
+    distance = (TimeElapsed * 34300) / 2
+    print(distance)
+    return distance
 
 # Reverse
 def reverse():
@@ -69,3 +108,12 @@ def center_average(hsv):
     for i in range(0, 3):
         divided[i] = int(divided[i])
     print(divided)
+
+if __name__ == "__main__":
+    try:
+        while True:
+            dist = get_distance()
+            print(dist)
+    except KeyboardInterrupt:
+        print("Measurement stopped by User")
+        GPIO.cleanup()
