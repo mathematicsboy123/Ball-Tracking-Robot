@@ -35,7 +35,6 @@ GPIO.setup(B1A, GPIO.OUT)
 
 # Get distance for the forward ultrasonic sensor
 def get_distance_forward():
-
     # Emmit sound wave from trigger pin
     GPIO.output(trigger, True)
 
@@ -60,9 +59,7 @@ def get_distance_forward():
 
 
 # Get the distance from the back ultrasonic sensor
-
 def get_distance_reverse():
-
     # Emmit sound wave from trigger pin
     GPIO.output(trigger_2, True)
 
