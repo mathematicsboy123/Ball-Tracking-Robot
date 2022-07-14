@@ -11,14 +11,7 @@ picam2 = Picamera2()
 
 cwidth = 640
 cheight = 480
-ball_width = 7
-
-# Generate new focal distance based on current focal distance and distance from ball
-def generate_focal_distance(distance, focal):
-    if distance < 12:
-        return 415.5
-    elif distance < 32 and focal == 590:
-        return 523.5
+ball_width = 6
 
 # Configure camera image types
 def config_camera():
@@ -28,15 +21,15 @@ def config_camera():
 
 
 def detect_ball():
-    focal_distance = 590
+    focal_distance = 415.5
     # Get image and convert to BGR to HSV
     buffer = picam2.capture_array()
     color = cv2.cvtColor(buffer, cv2.COLOR_RGB2BGR)
     hsv = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
     
     # Threshold of red in HSV space
-    lower_blue = np.array([1, 120, 130]) # Darker bound of color
-    upper_blue = np.array([30, 255, 255]) # Lighter bound of color
+    lower_blue = np.array([1, 160, 170]) # Darker bound of color
+    upper_blue = np.array([20, 255, 255]) # Lighter bound of color
 
     # Generate mask useing the color bounds
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
@@ -48,7 +41,7 @@ def detect_ball():
     cY = 0
     red_found = "no"
 
-    if white_pix > 300:
+    if white_pix > 500:
         # Generate kernal for image
         kernel = np.ones((5,5), np.uint8)
 
@@ -86,9 +79,8 @@ def detect_ball():
 
         # Calculate distance from the ball and generate new focal distance
         dist = ((ball_width * focal_distance) / w)
-        focal_distance = generate_focal_distance(dist, focal_distance)
-        if focal_distance == 415.5:
-            return "10"
+        if 11.5 < dist < 12.5:
+            return [dist, cX/cwidth]
 
         # Find the center of the circle using the binary image
         cv2.circle(color, (cX,cY), radius=5, color=(255, 0, 0), thickness=-1)
