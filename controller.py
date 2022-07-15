@@ -1,16 +1,16 @@
-import testing
+import image_processing
 import time
 from move import move, motorStop, destroy, setup
 from led import set_all_switch_off, switch, switchSetup
 from servo import servo, apply_offset_clipper, reset_servos
 from armutils import solver
     
-testing.config_camera()
+image_processing.config_camera()
 
 
 def ball_tracking():
     # Get information about the image
-    image_detection = testing.detect_ball()
+    image_detection = image_processing.detect_ball()
     if len(image_detection) == 2:
         angles = solver(image_detection[0])
         move(80, "forward", "no", 0.9)

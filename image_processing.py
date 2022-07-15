@@ -79,6 +79,7 @@ def detect_ball():
 
         # Calculate distance from the ball and generate new focal distance
         dist = ((ball_width * focal_distance) / w)
+        print(dist)
         if 11.5 < dist < 12.5:
             return [dist, cX/cwidth]
 

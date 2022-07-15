@@ -1,5 +1,6 @@
 import math
 
+# Use law of cosines to solve for angles give the sides of the triangle
 def solve_triangle(a, b, c):
     pi = math.pi
     cosA = ((c*c) + (b*b) - (a*a)) / (2*(b)*(c))
@@ -8,6 +9,7 @@ def solve_triangle(a, b, c):
 
     return ans
 
+# Using the lengths of the arm, figure out the angles that the servo motors need to rotate to
 def solver(distance):
     arm2 = 13
     arm3 = 14

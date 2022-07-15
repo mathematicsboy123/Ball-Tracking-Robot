@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 
+# Set up LED switches
 def switchSetup():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)
@@ -7,6 +8,7 @@ def switchSetup():
     GPIO.setup(6, GPIO.OUT)
     GPIO.setup(13, GPIO.OUT)
 
+# Change the LED's states
 def switch(port, status):
     if port == 1:
         if status == 1:
@@ -32,6 +34,7 @@ def switch(port, status):
     else:
         print('Wrong Command: Example--switch(3, 1)->to switch on port3')
 
+# Turn off all switches
 def set_all_switch_off():
     switch(1,0)
     switch(2,0)

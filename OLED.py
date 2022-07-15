@@ -10,17 +10,6 @@ try:
 except:
 	print('OLED disconnected')
 
-# Box and text rendered in portrait mode
-# with canvas(device) as draw:
-# 	draw.text((0, 0), "WWW.CODELECTRON.COM", fill="white")
-# 	draw.text((0, 10), "WWW.CODELECTRON.COM", fill="white")
-# 	draw.text((0, 20), "WWW.CODELECTRON.COM", fill="white")
-# 	draw.text((0, 30), "WWW.CODELECTRON.COM", fill="white")
-# 	draw.text((0, 40), "WWW.CODELECTRON.COM", fill="white")
-# 	draw.text((0, 50), "WWW.CODELECTRON.COM", fill="white")
-# while 1:
-# 	time.sleep(1)
-
 text_1 = 'x'
 text_2 = 'Noio Soio Boio'
 text_3 = 'x'
@@ -31,14 +20,14 @@ text_6 = 'x'
 class OLED_ctrl(threading.Thread):
 	def __init__(self, *args, **kwargs):
 		super(OLED_ctrl, self).__init__(*args, **kwargs)
-		self.__flag = threading.Event()	 # 用于暂停线程的标识
-		self.__flag.set()	   # 设置为True
-		self.__running = threading.Event()	  # 用于停止线程的标识
-		self.__running.set()	  # 将running设置为True
+		self.__flag = threading.Event()
+		self.__flag.set()
+		self.__running = threading.Event()
+		self.__running.set()
 
 	def run(self):
 		while self.__running.isSet():
-			self.__flag.wait()	  # 为True时立即返回, 为False时阻塞直到内部的标识位为True后返回
+			self.__flag.wait()
 			with canvas(device) as draw:
 				draw.text((0, 0), text_1, fill="white")
 				draw.text((0, 10), text_2, fill="white")
@@ -50,14 +39,14 @@ class OLED_ctrl(threading.Thread):
 			self.pause()
 
 	def pause(self):
-		self.__flag.clear()	 # 设置为False, 让线程阻塞
+		self.__flag.clear()
 
 	def resume(self):
-		self.__flag.set()	# 设置为True, 让线程停止阻塞
+		self.__flag.set()
 
 	def stop(self):
-		self.__flag.set()	   # 将线程从暂停状态恢复, 如何已经暂停的话
-		self.__running.clear()		# 设置为False  
+		self.__flag.set()
+		self.__running.clear()
 
 	def screen_show(self, position, text):
 		global text_1, text_2, text_3, text_4, text_5, text_6
