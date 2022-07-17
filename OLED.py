@@ -10,12 +10,12 @@ try:
 except:
 	print('OLED disconnected')
 
-text_1 = 'x'
-text_2 = 'Noio Soio Boio'
-text_3 = 'x'
-text_4 = 'x'
-text_5 = 'x'
-text_6 = 'x'
+text_1 = "LOL"
+text_2 = "LOL"
+text_3 = "LOL"
+text_4 = "LOL"
+text_5 = "LOL"
+text_6 = "LOL"
 
 class OLED_ctrl(threading.Thread):
 	def __init__(self, *args, **kwargs):
@@ -35,7 +35,6 @@ class OLED_ctrl(threading.Thread):
 				draw.text((0, 30), text_4, fill="white")
 				draw.text((0, 40), text_5, fill="white")
 				draw.text((0, 50), text_6, fill="white")
-			print('loop')
 			self.pause()
 
 	def pause(self):
