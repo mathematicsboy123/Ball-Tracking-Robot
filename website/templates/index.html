@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Configure color detection
+{% endblock %}
+
+{% block main %}
+    <div class="slidecontainer">
+        <form id="1" method="post" action="/">
+            <input type="range" min="1" max="100" value="50" class="slider" id="myRange" name="input">
+        </form>
+    </div>
+    <div id="demo"></div>
+    <img src="/static/binary.jpg" width="500" height="600">
+{% endblock %}
