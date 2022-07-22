@@ -12,5 +12,5 @@ flask run
 kill -9 $camera
 
 # Start the Robot
-#cd ..
-#python3 controller.py
+cd ..
+python3 controller.py
