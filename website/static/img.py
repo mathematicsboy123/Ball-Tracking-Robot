@@ -1,3 +1,4 @@
+# Written by Shreyans Daga
 import numpy as np
 import cv2
 from picamera2 import Picamera2
@@ -21,10 +22,15 @@ def detect_ball():
     buffer = picam2.capture_array()
     color = cv2.cvtColor(buffer, cv2.COLOR_RGB2BGR)
     hsv = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
-    
-    # Threshold of red in HSV space
-    lower_blue = np.array([1, 160, 170]) # Darker bound of color
-    upper_blue = np.array([20, 255, 255]) # Lighter bound of color
+
+    # Threshold of orange in HSV space
+    lower_blue = np.array([1, 160, 170]) # Darker bound of color, Deafaut Values
+    upper_blue = np.array([20, 255, 255]) # Lighter bound of color, Deafaut Values
+
+    with open("hsv_values.txt", "r") as file:
+        text = file.readline().strip().split(", ")
+        lower_blue = np.array([int(text[0]), int(text[1]), int(text[2])]) # Darker bound of color
+        upper_blue = np.array([int(text[3]), int(text[4]), int(text[5])]) # Lighter bound of color
 
     # Generate mask using the color bounds
     mask = cv2.inRange(hsv, lower_blue, upper_blue)

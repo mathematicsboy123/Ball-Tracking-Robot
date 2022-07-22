@@ -1,3 +1,4 @@
+# Written by Shreyans Daga
 import numpy as np
 import cv2
 from picamera2 import Picamera2
@@ -27,9 +28,14 @@ def detect_ball():
     color = cv2.cvtColor(buffer, cv2.COLOR_RGB2BGR)
     hsv = cv2.cvtColor(color, cv2.COLOR_BGR2HSV)
     
-    # Threshold of red in HSV space
-    lower_blue = np.array([1, 160, 170]) # Darker bound of color
-    upper_blue = np.array([20, 255, 255]) # Lighter bound of color
+    # Threshold of orange in HSV space
+    lower_blue = np.array([1, 160, 170]) # Darker bound of color, Deafaut Values
+    upper_blue = np.array([20, 255, 255]) # Lighter bound of color, Deafaut Values
+
+    with open("website/static/hsv_values.txt", "r") as file:
+        text = file.readline().strip().split(", ")
+        lower_blue = np.array([int(text[0]), int(text[1]), int(text[2])]) # Darker bound of color
+        upper_blue = np.array([int(text[3]), int(text[4]), int(text[5])]) # Lighter bound of color
 
     # Generate mask useing the color bounds
     mask = cv2.inRange(hsv, lower_blue, upper_blue)
@@ -80,7 +86,7 @@ def detect_ball():
         # Calculate distance from the ball and generate new focal distance
         dist = ((ball_width * focal_distance) / w)
         print(dist)
-        if 11.5 < dist < 12.5:
+        if 11.25 < dist < 12.75:
             return [dist, cX/cwidth]
 
         # Find the center of the circle using the binary image

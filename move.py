@@ -1,3 +1,4 @@
+# Written by Shreyans Daga
 import time
 import RPi.GPIO as GPIO
 from servo import turn_front_servo
@@ -142,7 +143,7 @@ def move(speed, direction, turn, radius=0.6):# 0 < radius <= 1
 	else:
 		pass
 
-# Cleanp up GPIO pins
+# Cleanup up GPIO pins
 def destroy():
 	motorStop()
 	GPIO.cleanup()

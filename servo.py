@@ -1,3 +1,4 @@
+# Written by Shreyans Daga
 from time import *
 from adafruit_servokit import ServoKit
 
@@ -27,7 +28,7 @@ def reset_servos():
     servo(1, 83)
     servo(2, 180)
     servo(3, 65)
-    servo(4, 180)
+    servo(4, 160)
 
 # Generate angle for the location of the arm based on where the center of the ball is
 def apply_offset_clipper(center):
@@ -41,3 +42,4 @@ def apply_offset_clipper(center):
 if __name__ == "__main__":
     while True:
         reset_servos()
+        

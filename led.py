@@ -1,3 +1,4 @@
+# Written by Shreyans Daga
 import RPi.GPIO as GPIO
 
 # Set up LED switches

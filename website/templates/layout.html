@@ -21,17 +21,31 @@
         <main class="container-fluid py-5 text-center">
             {% block main %}{% endblock %}
             <script>
-                var slider = document.getElementById("myRange");
-                var output = document.getElementById("demo");
-                var form = document.getElementById("1");
-                output.innerHTML = slider.value;
-                
-                setInterval(() => { form.submit() }, 1000)
+                var refresh_rate = 1250
+                var min_h = document.getElementById("min_h");
+                var min_s = document.getElementById("min_s");
+                var min_v = document.getElementById("min_v");
+                var max_h = document.getElementById("max_h");
+                var max_s = document.getElementById("max_s");
+                var max_v = document.getElementById("max_v");
 
-                slider.oninput = function submitform() {
-                    output.innerHTML = slider.value;
-                    console.log(slider.value)
-                }
+                var output = document.getElementById("demo");
+                var output1 = document.getElementById("demo1");
+                var output2 = document.getElementById("demo2");
+                var output3 = document.getElementById("demo3");
+                var output4 = document.getElementById("demo4");
+                var output5 = document.getElementById("demo5");
+
+                var form = document.getElementById("1");
+
+                output.innerHTML = min_h.value;
+                output1.innerHTML = min_s.value;
+                output2.innerHTML = min_v.value;
+                output3.innerHTML = max_h.value;
+                output4.innerHTML = max_s.value;
+                output5.innerHTML = max_v.value;
+                
+                setInterval(() => { form.submit() }, refresh_rate)
 
                 function refreshImage(imgElement, imgURL){    
                     var timestamp = new Date().getTime();
@@ -42,7 +56,7 @@
                     el.src = imgURL + queryString;   
                     console.log("Its running") 
                 }
-                setInterval(() => { refreshImage("image", "/static/binary.jpg") }, 1000);
+                setInterval(() => { refreshImage("image", "/static/binary.jpg") }, refresh_rate);
             </script>
         </main>
     </body>

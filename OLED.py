@@ -1,23 +1,27 @@
+# Written by Shreyans Daga
 from luma.core.interface.serial import i2c
 from luma.core.render import canvas
-from luma.oled.device import ssd1306, ssd1325, ssd1331, sh1106
+from luma.oled.device import ssd1306
 import time
 import threading
 
+# Check if OLED is available on i2c
 try:
 	serial = i2c(port=1, address=0x3C)
 	device = ssd1306(serial, rotate=0)
 except:
 	print('OLED disconnected')
 
-text_1 = "LOL"
-text_2 = "LOL"
-text_3 = "LOL"
-text_4 = "LOL"
-text_5 = "LOL"
-text_6 = "LOL"
+text_1 = "Ball Tracking Robot"
+text_2 = "Made By Shreyans Daga"
+text_3 = "Code on Github"
+text_4 = "Webstite with videos"
+text_5 = "Official Documentation"
+text_6 = "Bluestamp Engineering"
 
+# Initialize OLED class that has all of the code to operate OLED
 class OLED_ctrl(threading.Thread):
+	# Initialize arguments
 	def __init__(self, *args, **kwargs):
 		super(OLED_ctrl, self).__init__(*args, **kwargs)
 		self.__flag = threading.Event()
@@ -25,6 +29,7 @@ class OLED_ctrl(threading.Thread):
 		self.__running = threading.Event()
 		self.__running.set()
 
+	# Display text
 	def run(self):
 		while self.__running.isSet():
 			self.__flag.wait()
@@ -37,6 +42,7 @@ class OLED_ctrl(threading.Thread):
 				draw.text((0, 50), text_6, fill="white")
 			self.pause()
 
+	# Define basic functionality
 	def pause(self):
 		self.__flag.clear()
 
@@ -47,6 +53,7 @@ class OLED_ctrl(threading.Thread):
 		self.__flag.set()
 		self.__running.clear()
 
+	# Actually light up the screen with the text
 	def screen_show(self, position, text):
 		global text_1, text_2, text_3, text_4, text_5, text_6
 		if position == 1:

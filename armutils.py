@@ -1,3 +1,4 @@
+# Written by Shreyans Daga
 import math
 
 # Use law of cosines to solve for angles give the sides of the triangle
@@ -20,7 +21,7 @@ def solver(distance):
     base_angle = angles[0]
     top_angle = angles[1]
 
-    return [base_angle, top_angle + 3]
+    return [base_angle, top_angle + 3 ] # Added 3 as an offset to grab the top of the object
 
 if __name__ == "__main__":
     ans = solver(10)

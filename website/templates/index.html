@@ -7,9 +7,25 @@
 {% block main %}
     <div class="slidecontainer">
         <form id="1" method="post" action="/">
-            <input type="range" min="1" max="100" value="50" class="slider" id="myRange" name="input">
+            <input type="range" min="0" max="255" value= {{ min_h }} class="slider" id="min_h" name="min_h">
+            <p>Lower Bound Hue: <span id="demo"></span></p>
+            <input type="range" min="0" max="255" value= {{ min_s }} class="slider" id="min_s" name="min_s">
+            <p>Lower Bound Saturation: <span id="demo1"></span></p>
+            <input type="range" min="0" max="255" value= {{ min_v }} class="slider" id="min_v" name="min_v">
+            <p>Lower Bound Value: <span id="demo2"></span></p>
+            <input type="range" min="0" max="255" value= {{ max_h }} class="slider" id="max_h" name="max_h">
+            <p>Upper Bound Hue: <span id="demo3"></span></p>
+            <input type="range" min="0" max="255" value= {{ max_s }} class="slider" id="max_s" name="max_s">
+            <p>Upper Bound Saturation: <span id="demo4"></span></p>
+            <input type="range" min="0" max="255" value= {{ max_v }} class="slider" id="max_v" name="max_v">
+            <p>Upper Bound Value: <span id="demo5"></span></p>
+        </form>
+        <form id="2" method="get" action="/">
+            <input type="hidden" name="final" value="final" />
+            <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     </div>
-    <div id="demo"></div>
-    <img src="/static/binary.jpg" width="500" height="600">
+    <div>
+        <img class="image" src="/static/binary.jpg" width="640" height="480">
+    </div>
 {% endblock %}

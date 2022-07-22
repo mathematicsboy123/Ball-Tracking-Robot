@@ -1,5 +1,14 @@
 .slidecontainer{
     width: 500px;
+    left: 50px;
+    top: 100px;
+    position: absolute;
+}
+
+.image{
+    left: 700px;
+    top: 100px;
+    position: absolute;
 }
 .slider {
     -webkit-appearance: none;
