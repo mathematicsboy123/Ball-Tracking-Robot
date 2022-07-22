@@ -5,7 +5,7 @@ A robot that can track any object and go towards it and pick it up. This robot a
 # Dependencies
 - Picamera2 0.2.2
 - OpenCV 4.6.0
-- Adafruit-Blinks 8.0.2
+- Adafruit-Blinka 8.0.2
 - Numpy 1.23.1
 - Luma.core 2.3.1
 - Luma.oled 3.8.1
