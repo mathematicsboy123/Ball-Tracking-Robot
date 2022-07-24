@@ -1,5 +1,5 @@
 ﻿# Ball Tracking Robot
-  This robot uses OpenCV and picamera to track a ball and then the robot will travel to the ball. It also is capable of detecting human gestures and moving in the appropriate ways. 
+  A robot that can track any object and go towards it and pick it up. This robot also has gesture control capeabilities. The initial ball tracking robot was completed in the first three milestone videos and in the v1.0.0 documentation. The second robot (Knight Rider) was built and completed in the last three milestone videos and in the v2.0.0 documentation.
 
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
