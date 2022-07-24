@@ -4,8 +4,8 @@
 | **Engineer** | **School** | **Area of Interest** | **Grade** |
 |:--:|:--:|:--:|:--:|
 | Shreyans D | Stamford Highschool | Computer Science & Mechanical Engineering | Incoming Sophmore
-![Shreyans D](./Shreyans.png)
 
+![Shreyans D](./Shreyans.png)
 ![Headstone Image](https://raw.githubusercontent.com/BlueStampEng/BSE_Template_Portfolio/de8633f62b5da2234992a0178a6a72fd6df7e7e1/branding/BlueStamp-Logo.svg)
 ![Robot_Image](./Robot.png)
 ## [Documentation (v2.0.0)](./Work.pdf)
