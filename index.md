@@ -6,6 +6,9 @@
 | Shreyans D | Stamford Highschool | Computer Science & Mechanical Engineering | Incoming Sophmore
 
 ![Shreyans D](./Shreyans.png)
+
+
+
 ![Robot_Image](./Robot.png)
 ## [Documentation (v2.0.0)](./Work.pdf)
 
